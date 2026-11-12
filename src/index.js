@@ -1,7 +1,7 @@
 import express from "express"
 import process from "node:process"
 import userRouter from "./routes/user.routes.js"
-import "./crons/cron.js"
+import "./fakebd.js"
 const PORT = process.env.PORT
 
 const app = express()
