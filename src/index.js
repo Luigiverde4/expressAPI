@@ -1,17 +1,13 @@
 import express from "express"
 import process from "node:process"
 import userRouter from "./routes/user.routes.js"
-import cron from "node-cron"
-
+import "./crons/cron.js"
 const PORT = process.env.PORT
 
 const app = express()
 app.use(express.json())
 
-// Schedule a cron job to run every minute
-cron.schedule("* * * * *", () => {
-    console.log("Cron job")
-})
+
 
 app.listen(PORT, () => {
     console.log(`Server is running on PORT ${PORT}`)
