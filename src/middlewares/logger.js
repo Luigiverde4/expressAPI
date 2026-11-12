@@ -2,8 +2,7 @@ import { info } from "logger-luigiverde4"
 
 export const log = (req, res, next) => {
     const start = new Date()
-    const date = Date().toLocaleString()
-    info(`${req.method} - ${date} - Middleware! `)
+    info(`${req.method} - ${start} - Middleware! `)
 
     res.on("finish", () => {
         const duration = start - new Date()
@@ -15,7 +14,6 @@ export const log = (req, res, next) => {
 
 export const log2 = (req, res, next) => {
     const start = new Date()
-    const date = new Date().toLocaleString()
     info(`${req.method} - ${start} - Middleware! `)
     res.on("finish", () => {
         const duration = start - new Date()
