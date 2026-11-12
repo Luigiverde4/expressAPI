@@ -19,6 +19,7 @@ const members = [
         id: 3,
         name: "Shannon Jackson",
         email: "shannon@gmail.com",
+        status: "active",
         membershipExpires: "2026-11-10",
     },
 ];
@@ -28,7 +29,7 @@ cron.schedule("* * * * * ", () => {
     const date = new Date()
     members
         .filter((member) => {
-            return new Date(member.membershipExpires) - date > 0;
+            return member.status === "active";
         })
         .forEach((member) => {
             console.log(`Name: ${member.name}, Email: ${member.email}, Time remaining: ${new Date(member.membershipExpires) - date}`)
