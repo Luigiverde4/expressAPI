@@ -1,29 +1,16 @@
 import express from "express"
 import { log, log2 } from "../middlewares/logger.js"
-
+import { get, post, put, deleteUser } from "../controllers/user.controller.js"
 
 const router = express.Router()
 
-router.get("/", log, log2, (req, res) => {
-    res.json({
-        "users": true
-    })
-})
+router.get("/", log, log2, get)
 
-router.post("/:id", (req, res) => {
-    console.log(req.body)
-    res.status(501).send("Usuario actualizado")
-})
+router.post("/:id", log, log2, post)
 
-router.put("/:id", (req, res) => {
-    console.log(req.params.id)
-    res.send("Usuario actualizado")
-})
+router.put("/:id", log, log2, put)
 
-router.delete("/:id", (req, res) => {
-    console.log(req.params.id)
-    res.status(200).send("Usuario eliminado")
-})
+router.delete("/:id", log, log2, deleteUser)
 
 
 
