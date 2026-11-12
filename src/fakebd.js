@@ -24,7 +24,7 @@ const members = [
 ];
 
 
-cron.schedule("* * * * ", () => {
+cron.schedule("* * * * * ", () => {
     const date = new Date()
     members.forEach((member) => {
         // Comprobar que no haya caducado ya
