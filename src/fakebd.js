@@ -26,13 +26,11 @@ const members = [
 
 cron.schedule("* * * * * ", () => {
     const date = new Date()
-    members.forEach((member) => {
-        // Comprobar que no haya caducado ya
-        if (new Date(member.membershipExpires) - date > 0) {
-            // Console log nombre, correo, tiempo restante
+    members
+        .filter((member) => {
+            return new Date(member.membershipExpires) - date > 0;
+        })
+        .forEach((member) => {
             console.log(`Name: ${member.name}, Email: ${member.email}, Time remaining: ${new Date(member.membershipExpires) - date}`)
-        } else {
-            console.log(`Name: ${member.name}, Email: ${member.email}, Membership expired`)
-        }
-    })
+        })
 })
