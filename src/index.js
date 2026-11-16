@@ -2,7 +2,6 @@ import express from "express"
 import process from "node:process"
 import router from "./routes/index.js"
 import { dbConnection } from "./config/db.js"
-import mongoose from "mongoose"
 // import "./fakebd.js"
 
 const PORT = process.env.PORT
@@ -10,9 +9,7 @@ const PORT = process.env.PORT
 const app = express()
 app.use(express.json())
 
-app.listen(PORT, () => {
-    console.log(`Server is running on PORT ${PORT}`)
-})
+
 
 app.get("/status", (req, res) => {
     res.json({
@@ -36,3 +33,7 @@ dbConnection()
         console.log("Error in Database connection")
         console.log(error)
     })
+
+app.listen(PORT, () => {
+    console.log(`Server is running on PORT ${PORT}`)
+})
