@@ -1,7 +1,7 @@
 import express from "express"
 import process from "node:process"
 import router from "./routes/index.js"
-import "./fakebd.js"
+// import "./fakebd.js"
 
 const PORT = process.env.PORT
 
