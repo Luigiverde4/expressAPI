@@ -1,13 +1,12 @@
 import express from "express"
 import process from "node:process"
-import userRouter from "./routes/user.routes.js"
+import router from "./routes/index.js"
 import "./fakebd.js"
+
 const PORT = process.env.PORT
 
 const app = express()
 app.use(express.json())
-
-
 
 app.listen(PORT, () => {
     console.log(`Server is running on PORT ${PORT}`)
@@ -25,4 +24,4 @@ app.get("/", (req, res) => {
 })
 
 
-app.use("/users", userRouter)
+app.use("/", router)
