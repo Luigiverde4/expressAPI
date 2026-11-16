@@ -1,6 +1,8 @@
 import express from "express"
 import process from "node:process"
 import router from "./routes/index.js"
+import { dbConnection } from "./config/db.js"
+import mongoose from "mongoose"
 // import "./fakebd.js"
 
 const PORT = process.env.PORT
@@ -25,3 +27,12 @@ app.get("/", (req, res) => {
 
 
 app.use("/", router)
+
+dbConnection()
+    .then(() => {
+        console.log("Database connected")
+    })
+    .catch((error) => {
+        console.log("Error in Database connection")
+        console.log(error)
+    })
