@@ -28,12 +28,12 @@ app.use("/", router)
 dbConnection()
     .then(() => {
         console.log("Database connected")
+        app.listen(PORT, () => {
+            console.log(`Server is running on PORT ${PORT}`)
+        })
     })
     .catch((error) => {
-        console.log("Error in Database connection")
+        console.log("Error")
         console.log(error)
     })
 
-app.listen(PORT, () => {
-    console.log(`Server is running on PORT ${PORT}`)
-})
