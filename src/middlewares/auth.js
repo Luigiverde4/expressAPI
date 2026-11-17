@@ -18,9 +18,9 @@ function auth(req, res, next) {
             return res.status(401).json({ error: "Invalid token" })
         }
         req.user = decoded
+        console.log("User authenticated:", req.user)
+        next()
     })
-    console.log("User authenticated:", req.user)
-    next()
 }
 
 export default auth
