@@ -27,7 +27,6 @@ export async function createTask(req, res) {
 export async function deleteTask(req, res) {
     const taskId = req.params.id
     const userId = req.user.id
-    console.log("Deleting task with ID:", taskId, "for user ID:", userId)
     Task.findOneAndDelete({ _id: taskId, userId })
         .then((task) => {
             if (!task) {
