@@ -39,3 +39,20 @@ export async function deleteTask(req, res) {
             res.status(500).json({ error: "Error al eliminar la tarea", errorMsg: err.message })
         })
 }
+
+export async function deleteAllTasks(req, res) {
+    const userId = req.user.id
+    console.log("Deleting all tasks for user ID:", userId)
+    Task.deleteMany({ userId })
+        .then((result) => {
+            res.json({ message: `Se eliminaron ${result.deletedCount} tareas correctamente` })
+        })
+        .catch((err) => {
+            res.status(500).json({ error: "Error al eliminar las tareas", errorMsg: err.message })
+        })
+}
+
+// {
+//   "error": "Error al eliminar la tarea",
+//   "errorMsg": "Cast to ObjectId failed for value \"delete-all\" (type string) at path \"_id\" for model \"Task\""
+// }
