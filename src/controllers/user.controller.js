@@ -20,3 +20,9 @@ export const deleteUser = (req, res) => {
     console.log(req.params.id)
     res.status(200).send("Usuario eliminado")
 }
+
+export const getUserProfile = (req, res) => {
+    res.json({
+        "profile": "Perfil de usuario"
+    })
+}

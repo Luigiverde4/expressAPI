@@ -1,5 +1,7 @@
 import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import process from "node:process";
 
 export async function register(req, res) {
 
@@ -32,7 +34,7 @@ export async function login(req, res) {
         return res.status(400).json({ error: "Email and password are required" })
     }
 
-    const user = await User.findOne({ where: { email } })
+    const user = await User.findOne({ email })
     if (!user) {
         return res.status(401).json({ error: "User or email invalid" })
     }
@@ -41,9 +43,16 @@ export async function login(req, res) {
         return res.status(401).json({ error: "User or email invalid" })
     }
 
+    const token = jwt.sign({
+        id: user.id,
+        email: user.email,
+    }
+        , process.env.JWT_SECRET,
+        { expiresIn: "1h" }
+    )
 
     res.status(200).json({
         message: "User logged in",
-        data: { id: user.id, email: user.email }
+        data: { id: user.id, email: user.email, token }
     })
 }
