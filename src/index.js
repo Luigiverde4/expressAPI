@@ -2,6 +2,7 @@ import express from "express"
 import process from "node:process"
 import router from "./routes/index.js"
 import { dbConnection } from "./config/db.js"
+import { errorHandler } from "./middlewares/errorhandler.js"
 // import "./fakebd.js"
 
 const PORT = process.env.PORT
@@ -24,6 +25,8 @@ app.get("/", (req, res) => {
 
 
 app.use("/", router)
+
+app.use(errorHandler)
 
 dbConnection()
     .then(() => {
