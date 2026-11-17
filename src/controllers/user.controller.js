@@ -1,4 +1,4 @@
-
+import User from "../models/user.model.js"
 
 export const get = (req, res) => {
     res.json({
@@ -21,8 +21,14 @@ export const deleteUser = (req, res) => {
     res.status(200).send("Usuario eliminado")
 }
 
-export const getUserProfile = (req, res) => {
+export async function getUserProfile(req, res) {
+    const user = await User.findOne({ email: req.user.email })
+
+    if (!user) {
+        return res.status(404).json({ error: "User not found" })
+    }
     res.json({
-        "profile": "Perfil de usuario"
+        "email": user.email,
+        "name": user.name
     })
 }
